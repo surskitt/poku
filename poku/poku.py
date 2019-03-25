@@ -19,6 +19,7 @@ def parse_args(args):
 
 
 def get_response_token(consumer):
+    """ get response token from api """
     data = {
         'consumer_key': consumer,
         'redirect_uri': 'https://getpocket.com'
@@ -35,6 +36,7 @@ def get_response_token(consumer):
 
 
 def generate_auth_url(request_token):
+    """ return auth url for user to authorize application """
     url = ('https://getpocket.com/auth/authorize'
            '?request_token={0}'
            '&redirect_uri=https://getpocket.com').format(request_token)
@@ -43,6 +45,7 @@ def generate_auth_url(request_token):
 
 
 def get_access_token(consumer_key, request_token):
+    """ get access token from api """
     data = {
         'consumer_key': consumer_key,
         'code': request_token
@@ -69,4 +72,5 @@ def get_pocket_items(consumer_key, access_token):
 
 
 def sort_pocket_items(item_list):
+    """ sort list of pocket items based on update time """
     return sorted(item_list, key=lambda x: x['time_updated'])

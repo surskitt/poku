@@ -57,6 +57,7 @@ def test_get_request_token_not_ok(mock_get):
 
 
 def test_generate_auth_url():
+    """ test that expected auth url is generated """
     token = 'hello'
     expected_url = ('https://getpocket.com/auth/authorize'
                     '?request_token={0}'
@@ -68,6 +69,7 @@ def test_generate_auth_url():
 
 @patch('poku.poku.requests.get')
 def test_get_access_token(mock_get):
+    """ test access token requests """
     mock_get.return_value.ok = True
     mock_get.return_value.json = lambda: {'access_token': 'a'}
 
@@ -77,6 +79,7 @@ def test_get_access_token(mock_get):
 
 @patch('poku.poku.requests.get')
 def test_get_access_token_not_ok(mock_get):
+    """ test that unsuccessful access token requests return None """
     mock_get.return_value.ok = False
 
     atoken = poku.get_access_token('ck', 'rt')
@@ -101,7 +104,7 @@ def test_get_pocket_items(mock_get):
 
 @patch('poku.poku.requests.get')
 def test_get_pocket_items_not_ok(mock_get):
-    """ Test that unsuccessful pocket items requests return None """
+    """ test that unsuccessful pocket items requests return None """
     mock_get.return_value.ok = False
 
     pocket_items = poku.get_pocket_items('ck', 'at')
@@ -113,6 +116,7 @@ def test_get_pocket_items_not_ok(mock_get):
     [{'time_updated': '2'}, {'time_updated': '1'}]
 ])
 def test_sort_pocket_items(item_list):
+    """ test that items are being sorted correctly """
     expected = [{'time_updated': '1'}, {'time_updated': '2'}]
     sorted_list = poku.sort_pocket_items(item_list)
 

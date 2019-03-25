@@ -54,5 +54,9 @@ def get_access_token(consumer_key, request_token):
         return None
 
 
-if __name__ == '__main__':
+def main():
     args = parse_args(sys.argv[1:])
+
+
+if __name__ == '__main__':
+    main()

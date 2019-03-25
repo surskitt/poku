@@ -52,11 +52,3 @@ def get_access_token(consumer_key, request_token):
         return r.json()['access_token']
     else:
         return None
-
-
-def main():
-    args = parse_args(sys.argv[1:])
-
-
-if __name__ == '__main__':
-    main()

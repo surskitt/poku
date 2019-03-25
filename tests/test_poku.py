@@ -28,7 +28,7 @@ def test_no_consumer():
 def test_get_request_token(mock_get):
     """ Test if successful token requests return expected token """
     mock_get.return_value.ok = True
-    mock_get.return_value.text = 'a=b'
+    mock_get.return_value.json = lambda: {'code': 'b'}
 
     token = poku.get_response_token('abc')
     assert token == 'b'
@@ -38,6 +38,7 @@ def test_get_request_token(mock_get):
 def test_get_request_token_not_ok(mock_get):
     """ Test that unsuccessful token requests return None """
     mock_get.return_value.ok = False
+
     token = poku.get_response_token('abc')
     assert token is None
 

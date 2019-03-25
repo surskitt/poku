@@ -42,5 +42,17 @@ def generate_auth_url(rtoken):
     return url
 
 
+def get_access_token(ck, rt):
+    data = {
+        'consumer_key': ck,
+        'code': rt
+    }
+    r = requests.get('https://getpocket.com/v3/oauth/authorize', data=data)
+    if r.ok:
+        return r.json()['access_token']
+    else:
+        return None
+
+
 if __name__ == '__main__':
     args = parse_args(sys.argv[1:])

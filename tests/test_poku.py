@@ -62,3 +62,20 @@ def test_generate_auth_url():
 
     url = poku.generate_auth_url(token)
     assert url == expected_url
+
+
+@patch('poku.poku.requests.get')
+def test_get_access_token(mock_get):
+    mock_get.return_value.ok = True
+    mock_get.return_value.json = lambda: {'access_token': 'a'}
+
+    atoken = poku.get_access_token('ck', 'rt')
+    assert atoken == 'a'
+
+
+@patch('poku.poku.requests.get')
+def test_get_access_token(mock_get):
+    mock_get.return_value.ok = False
+
+    atoken = poku.get_access_token('ck', 'rt')
+    assert atoken is None

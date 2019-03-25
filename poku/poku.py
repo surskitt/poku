@@ -34,18 +34,18 @@ def get_response_token(consumer):
         return None
 
 
-def generate_auth_url(rtoken):
+def generate_auth_url(request_token):
     url = ('https://getpocket.com/auth/authorize'
            '?request_token={0}'
-           '&redirect_uri=https://getpocket.com').format(rtoken)
+           '&redirect_uri=https://getpocket.com').format(request_token)
 
     return url
 
 
-def get_access_token(ck, rt):
+def get_access_token(consumer_key, request_token):
     data = {
-        'consumer_key': ck,
-        'code': rt
+        'consumer_key': consumer_key,
+        'code': request_token
     }
     r = requests.get('https://getpocket.com/v3/oauth/authorize', data=data)
     if r.ok:

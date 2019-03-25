@@ -8,7 +8,6 @@ import pytest
 
 
 from poku import poku
-import requests
 import configargparse
 
 

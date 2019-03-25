@@ -18,6 +18,12 @@ def test_parse_consumer():
     assert args.consumer == 'abc'
 
 
+def test_parse_access_token():
+    """ Test that an access token argument is handled and received """
+    args = poku.parse_args(['--access', 'def'])
+    assert args.access == 'def'
+
+
 def test_no_consumer():
     """ Test that missing out the consumer argument causes a system exit """
     with pytest.raises(SystemExit):

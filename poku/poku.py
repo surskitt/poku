@@ -21,7 +21,7 @@ def get_response_token(consumer):
         'redirect_uri': 'https://getpocket.com'
     }
     r = requests.get('https://getpocket.com/v3/oauth/request', data=data)
-    if r.ok:
+    if r.ok and '=' in r.text:
         return r.text.split('=')[1]
     else:
         return None

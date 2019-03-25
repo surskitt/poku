@@ -6,6 +6,7 @@ import configargparse
 
 
 def parse_args(args):
+    """ Parse arguments using configargparse module """
     conf_files = ['/etc/poku/*.cfg', '~/.config/poku/*.cfg']
     parser = configargparse.ArgParser(default_config_files=conf_files)
     parser.add('--consumer', '-p', required=True)

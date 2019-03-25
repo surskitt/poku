@@ -14,7 +14,9 @@ import configargparse
 
 @pytest.fixture
 def mandatory_args():
-    return ['--consumer', 'abc']
+    return [
+        '--consumer', 'abc'
+    ]
 
 
 def test_parse_consumer(mandatory_args):
@@ -79,3 +81,39 @@ def test_get_access_token_not_ok(mock_get):
 
     atoken = poku.get_access_token('ck', 'rt')
     assert atoken is None
+
+
+@patch('poku.poku.requests.get')
+def test_get_pocket_items(mock_get):
+    """ test that pocket items requests returns expected list """
+    mock_get.return_value.ok = True
+    mock_get.return_value.json = lambda: {
+        'list': {
+            'a': 'test1',
+            'b': 'test2'
+        }
+    }
+    expected = ['test1', 'test2']
+
+    pocket_items = poku.get_pocket_items('ck', 'at')
+    assert pocket_items == expected
+
+
+@patch('poku.poku.requests.get')
+def test_get_pocket_items_not_ok(mock_get):
+    """ Test that unsuccessful pocket items requests return None """
+    mock_get.return_value.ok = False
+
+    pocket_items = poku.get_pocket_items('ck', 'at')
+    assert pocket_items is None
+
+
+@pytest.mark.parametrize('item_list', [
+    [{'time_updated': '1'}, {'time_updated': '2'}],
+    [{'time_updated': '2'}, {'time_updated': '1'}]
+])
+def test_sort_pocket_items(item_list):
+    expected = [{'time_updated': '1'}, {'time_updated': '2'}]
+    sorted_list = poku.sort_pocket_items(item_list)
+
+    assert sorted_list == expected

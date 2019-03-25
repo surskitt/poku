@@ -52,3 +52,21 @@ def get_access_token(consumer_key, request_token):
         return r.json()['access_token']
     else:
         return None
+
+
+def get_pocket_items(consumer_key, access_token):
+    """ get a list pocket items from api """
+    data = {
+        'consumer_key': consumer_key,
+        'access_token': access_token
+    }
+    r = requests.get('https://getpocket.com/v3/get', data=data)
+
+    if r.ok:
+        return [i for i in r.json()['list'].values()]
+    else:
+        return None
+
+
+def sort_pocket_items(item_list):
+    return sorted(item_list, key=lambda x: x['time_updated'])

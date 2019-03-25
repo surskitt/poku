@@ -42,7 +42,11 @@ def test_get_request_token_not_ok(mock_get):
     assert token is None
 
 
-def test_request_response():
-    """ Test pocket endpoint """
-    response = requests.get('https://getpocket.com')
-    assert response.ok
+def test_generate_auth_url():
+    token = 'hello'
+    expected_url = ('https://getpocket.com/auth/authorize'
+                    '?request_token={0}'
+                    '&redirect_uri=https://getpocket.com').format(token)
+
+    url = poku.generate_auth_url(token)
+    assert url == expected_url

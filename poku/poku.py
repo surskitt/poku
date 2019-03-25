@@ -25,3 +25,11 @@ def get_response_token(consumer):
         return r.text.split('=')[1]
     else:
         return None
+
+
+def generate_auth_url(token):
+    url = ('https://getpocket.com/auth/authorize'
+           '?request_token={0}'
+           '&redirect_uri=https://getpocket.com').format(token)
+
+    return url

@@ -26,6 +26,7 @@ def test_no_consumer():
 
 @patch('poku.poku.requests.get')
 def test_get_request_token(mock_get):
+    """ Test if successful token requests return expected token """
     mock_get.return_value.ok = True
     mock_get.return_value.text = 'a=b'
 
@@ -35,6 +36,7 @@ def test_get_request_token(mock_get):
 
 @patch('poku.poku.requests.get')
 def test_get_request_token_not_ok(mock_get):
+    """ Test that unsuccessful token requests return None """
     mock_get.return_value.ok = False
     token = poku.get_response_token('abc')
     assert token is None

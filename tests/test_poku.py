@@ -3,6 +3,7 @@
 
 """Tests for `poku` package."""
 
+from unittest.mock import Mock, patch
 import pytest
 
 
@@ -21,6 +22,22 @@ def test_no_consumer():
     """ Test that missing out the consumer argument causes a system exit """
     with pytest.raises(SystemExit):
         args = poku.parse_args([])
+
+
+@patch('poku.poku.requests.get')
+def test_get_request_token(mock_get):
+    mock_get.return_value.ok = True
+    mock_get.return_value.text = 'a=b'
+
+    token = poku.get_response_token('abc')
+    assert token == 'b'
+
+
+@patch('poku.poku.requests.get')
+def test_get_request_token_not_ok(mock_get):
+    mock_get.return_value.ok = False
+    token = poku.get_response_token('abc')
+    assert token is None
 
 
 def test_request_response():

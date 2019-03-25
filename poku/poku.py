@@ -8,7 +8,7 @@ import requests
 
 
 def parse_args(args):
-    """ Parse arguments using configargparse module """
+    """ parse arguments using configargparse module """
     conf_files = ['/etc/poku/*.cfg', '~/.config/poku/*.cfg']
     parser = configargparse.ArgParser(default_config_files=conf_files)
     parser.add('--consumer', required=True)
@@ -18,7 +18,7 @@ def parse_args(args):
     return args
 
 
-def get_response_token(consumer):
+def get_pocket_response_token(consumer):
     """ get response token from api """
     data = {
         'consumer_key': consumer,
@@ -35,7 +35,7 @@ def get_response_token(consumer):
         return None
 
 
-def generate_auth_url(request_token):
+def generate_pocket_auth_url(request_token):
     """ return auth url for user to authorize application """
     url = ('https://getpocket.com/auth/authorize'
            '?request_token={0}'
@@ -44,7 +44,7 @@ def generate_auth_url(request_token):
     return url
 
 
-def get_access_token(consumer_key, request_token):
+def get_pocket_access_token(consumer_key, request_token):
     """ get access token from api """
     data = {
         'consumer_key': consumer_key,

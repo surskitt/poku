@@ -43,7 +43,7 @@ def test_get_request_token(mock_get):
     mock_get.return_value.ok = True
     mock_get.return_value.json = lambda: {'code': 'b'}
 
-    token = poku.get_response_token('abc')
+    token = poku.get_pocket_response_token('abc')
     assert token == 'b'
 
 
@@ -52,7 +52,7 @@ def test_get_request_token_not_ok(mock_get):
     """ Test that unsuccessful token requests return None """
     mock_get.return_value.ok = False
 
-    token = poku.get_response_token('abc')
+    token = poku.get_pocket_response_token('abc')
     assert token is None
 
 
@@ -63,7 +63,7 @@ def test_generate_auth_url():
                     '?request_token={0}'
                     '&redirect_uri=https://getpocket.com').format(token)
 
-    url = poku.generate_auth_url(token)
+    url = poku.generate_pocket_auth_url(token)
     assert url == expected_url
 
 
@@ -73,7 +73,7 @@ def test_get_access_token(mock_get):
     mock_get.return_value.ok = True
     mock_get.return_value.json = lambda: {'access_token': 'a'}
 
-    atoken = poku.get_access_token('ck', 'rt')
+    atoken = poku.get_pocket_access_token('ck', 'rt')
     assert atoken == 'a'
 
 
@@ -82,7 +82,7 @@ def test_get_access_token_not_ok(mock_get):
     """ test that unsuccessful access token requests return None """
     mock_get.return_value.ok = False
 
-    atoken = poku.get_access_token('ck', 'rt')
+    atoken = poku.get_pocket_access_token('ck', 'rt')
     assert atoken is None
 
 

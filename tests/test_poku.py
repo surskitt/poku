@@ -12,16 +12,21 @@ import requests
 import configargparse
 
 
-def test_parse_consumer():
+@pytest.fixture
+def mandatory_args():
+    return ['--consumer', 'abc']
+
+
+def test_parse_consumer(mandatory_args):
     """ Test that a consumer argument is handled and received """
-    args = poku.parse_args(['--consumer', 'abc'])
-    assert args.consumer == 'abc'
+    args = poku.parse_args(mandatory_args + ['--consumer', 'def'])
+    assert args.consumer == 'def'
 
 
-def test_parse_access_token():
+def test_parse_access_token(mandatory_args):
     """ Test that an access token argument is handled and received """
-    args = poku.parse_args(['--access', 'def'])
-    assert args.access == 'def'
+    args = poku.parse_args(mandatory_args + ['--access', 'ghi'])
+    assert args.access == 'ghi'
 
 
 def test_no_consumer():

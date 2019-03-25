@@ -11,12 +11,9 @@ def parse_args(args):
     """ Parse arguments using configargparse module """
     conf_files = ['/etc/poku/*.cfg', '~/.config/poku/*.cfg']
     parser = configargparse.ArgParser(default_config_files=conf_files)
-    parser.add('--consumer')
+    parser.add('--consumer', required=True)
     parser.add('--access')
     args = parser.parse_args(args)
-
-    if not args.consumer and not args.access:
-        parser.error('Either --consumer or --access is required')
 
     return args
 
@@ -37,10 +34,10 @@ def get_response_token(consumer):
         return None
 
 
-def generate_auth_url(token):
+def generate_auth_url(rtoken):
     url = ('https://getpocket.com/auth/authorize'
            '?request_token={0}'
-           '&redirect_uri=https://getpocket.com').format(token)
+           '&redirect_uri=https://getpocket.com').format(rtoken)
 
     return url
 

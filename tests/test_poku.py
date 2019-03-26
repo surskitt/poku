@@ -120,3 +120,22 @@ def test_sort_pocket_items(item_list):
     sorted_list = poku.sort_pocket_items(item_list)
 
     assert sorted_list == expected
+
+
+def test_pocket_item_to_dict():
+    """ test converting of pocket item list to universal item list """
+    pocket_item = {
+        'resolved_url': 'test.com',
+        'resolved_title': 'test page',
+        'tags': {'test': {}, 'test2': {}},
+        'time_updated': '1'
+    }
+    expected = {
+        'url': 'test.com',
+        'title': 'test page',
+        'tags': ['test', 'test2'],
+        'timestamp': 1
+    }
+
+    dict_item = poku.pocket_item_to_dict(pocket_item)
+    assert dict_item == expected

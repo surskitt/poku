@@ -65,7 +65,8 @@ def get_pocket_items(consumer_key, access_token):
     """ get a list pocket items from api """
     data = {
         'consumer_key': consumer_key,
-        'access_token': access_token
+        'access_token': access_token,
+        'detailType': 'complete'
     }
     r = requests.post('https://getpocket.com/v3/get', data=data)
 
@@ -78,6 +79,18 @@ def get_pocket_items(consumer_key, access_token):
 def sort_pocket_items(item_list):
     """ sort list of pocket items based on update time """
     return sorted(item_list, key=lambda x: x['time_updated'])
+
+
+def pocket_item_to_dict(p_item):
+    """ convert pocket item to universal dict """
+    out = {
+        'url': p_item.get('resolved_url') or p_item.get('given_url'),
+        'title': p_item.get('resolved_title') or p_item.get('given_title'),
+        'tags': list(p_item.get('tags', {}).keys()),
+        'timestamp': int(p_item.get('time_updated'))
+    }
+
+    return out
 
 
 def main():

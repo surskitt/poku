@@ -131,10 +131,7 @@ def test_pocket_item_to_dict():
 
 def test_buku_item_to_dict():
     """ test converting of buku item to universal item """
-    buku_item = (1,
-                 'test.com',
-                 'test page',
-                 ',test,test2,')
+    buku_item = (1, 'test.com', 'test page', ',test,test2,')
     expected = {
         'url': 'test.com',
         'title': 'test page',

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for `poku` package."""
+""" Tests for `poku` package. """
 
 from unittest.mock import Mock, patch
 import pytest
@@ -20,23 +20,23 @@ def mandatory_args():
 
 def test_parse_consumer(mandatory_args):
     """ Test that a consumer argument is handled and received """
-    args = poku.poku.parse_args(mandatory_args + ['--consumer', 'def'])
+    args = poku.utils.parse_args(mandatory_args + ['--consumer', 'def'])
     assert args.consumer == 'def'
 
 
 def test_parse_access_token(mandatory_args):
     """ Test that an access token argument is handled and received """
-    args = poku.poku.parse_args(mandatory_args + ['--access', 'ghi'])
+    args = poku.utils.parse_args(mandatory_args + ['--access', 'ghi'])
     assert args.access == 'ghi'
 
 
 def test_no_consumer():
     """ Test that missing out the consumer argument causes a system exit """
     with pytest.raises(SystemExit):
-        args = poku.poku.parse_args([])
+        args = poku.utils.parse_args([])
 
 
-@patch('poku.poku.requests.post')
+@patch('poku.pocket.requests.post')
 def test_get_request_token(mock_get):
     """ Test if successful token requests return expected token """
     mock_get.return_value.ok = True
@@ -46,7 +46,7 @@ def test_get_request_token(mock_get):
     assert token == 'b'
 
 
-@patch('poku.poku.requests.post')
+@patch('poku.pocket.requests.post')
 def test_get_request_token_not_ok(mock_get):
     """ Test that unsuccessful token requests return None """
     mock_get.return_value.ok = False
@@ -66,7 +66,7 @@ def test_generate_auth_url():
     assert url == expected_url
 
 
-@patch('poku.poku.requests.post')
+@patch('poku.pocket.requests.post')
 def test_get_access_token(mock_get):
     """ test access token requests """
     mock_get.return_value.ok = True
@@ -76,7 +76,7 @@ def test_get_access_token(mock_get):
     assert atoken == 'a'
 
 
-@patch('poku.poku.requests.post')
+@patch('poku.pocket.requests.post')
 def test_get_access_token_not_ok(mock_get):
     """ test that unsuccessful access token requests return None """
     mock_get.return_value.ok = False
@@ -85,7 +85,7 @@ def test_get_access_token_not_ok(mock_get):
     assert atoken is None
 
 
-@patch('poku.poku.requests.post')
+@patch('poku.pocket.requests.post')
 def test_get_pocket_items(mock_get):
     """ test that pocket items requests returns expected list """
     mock_get.return_value.ok = True
@@ -96,7 +96,7 @@ def test_get_pocket_items(mock_get):
     assert pocket_items == expected
 
 
-@patch('poku.poku.requests.post')
+@patch('poku.pocket.requests.post')
 def test_get_pocket_items_not_ok(mock_get):
     """ test that unsuccessful pocket items requests return None """
     mock_get.return_value.ok = False
@@ -134,7 +134,7 @@ def test_buku_item_to_dict():
         'timestamp': 1
     }
 
-    dict_item = poku.poku.buku_item_to_dict(buku_item)
+    dict_item = poku.buku.item_to_dict(buku_item)
     assert dict_item == expected
 
 
@@ -145,7 +145,7 @@ def test_buku_item_to_dict():
 def test_sort_dict_items(item_list):
     """ test that items are being sorted correctly """
     expected = [{'timestamp': '1'}, {'timestamp': '2'}]
-    sorted_list = poku.poku.sort_dict_items(item_list)
+    sorted_list = poku.utils.sort_dict_items(item_list)
 
     assert sorted_list == expected
 
@@ -156,5 +156,5 @@ def test_dict_list_difference():
     l2 = [{'url': 'b'}, {'url': 'c'}]
     expected = [{'url': 'a'}]
 
-    filtered_list = poku.poku.dict_list_difference(l1, l2)
+    filtered_list = poku.utils.dict_list_difference(l1, l2)
     assert filtered_list == expected

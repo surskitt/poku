@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" Pocket auth utils """
+""" Pocket specific utils """
 
 import requests
 

@@ -97,7 +97,7 @@ def test_get_pocket_items(mock_get):
     }
     expected = ['test1', 'test2']
 
-    pocket_items = poku.get_pocket_items('ck', 'at')
+    pocket_items = sorted(poku.get_pocket_items('ck', 'at'))
     assert pocket_items == expected
 
 

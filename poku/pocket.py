@@ -11,6 +11,7 @@ def get_request_token(consumer_key):
     headers = {'x-accept': 'application/json'}
     r = requests.post('https://getpocket.com/v3/oauth/request',
                       data=data, headers=headers)
+
     if r.ok:
         return r.json()['code']
     else:
@@ -32,6 +33,7 @@ def get_access_token(consumer_key, request_token):
     headers = {'x-accept': 'application/json'}
     r = requests.post('https://getpocket.com/v3/oauth/authorize',
                       data=data, headers=headers)
+
     if r.ok:
         return r.json()['access_token']
     else:

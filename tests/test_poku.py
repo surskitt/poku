@@ -89,8 +89,8 @@ def test_get_access_token_not_ok(mock_get):
 def test_get_pocket_items(mock_get):
     """ test that pocket items requests returns expected list """
     mock_get.return_value.ok = True
-    mock_get.return_value.json.return_value = {'list': {'a': 'test1', 'b': 'test2'}}
-    expected = ['test1', 'test2']
+    mock_get.return_value.json.return_value = {'list': {'a': 't1', 'b': 't2'}}
+    expected = ['t1', 't2']
 
     pocket_items = sorted(poku.pocket.get_items('ck', 'at'))
     assert pocket_items == expected

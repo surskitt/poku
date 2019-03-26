@@ -89,7 +89,7 @@ def pocket_item_to_dict(p_item):
 
 
 def sort_dict_items(item_list):
-    """ sort list of pocket items based on update time """
+    """ sort list of dict items based on update time """
     return sorted(item_list, key=lambda x: x['timestamp'])
 
 

@@ -97,6 +97,7 @@ def sort_dict_items(item_list):
 
 
 def dict_list_difference(l1, l2):
+    """ return items in l1 but not in l2 """
     return [i for i in l1 if i['url'] not in [j['url'] for j in l2]]
 
 

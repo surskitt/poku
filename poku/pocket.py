@@ -5,7 +5,7 @@
 import requests
 
 
-def get_pocket_request_token(consumer_key):
+def get_request_token(consumer_key):
     """ get request token from api """
     data = {'consumer_key': consumer_key, 'redirect_uri': 'getpocket.com'}
     headers = {'x-accept': 'application/json'}
@@ -17,7 +17,7 @@ def get_pocket_request_token(consumer_key):
         return None
 
 
-def generate_pocket_auth_url(request_token):
+def generate_auth_url(request_token):
     """ return auth url for user to authorize application """
     url = ('https://getpocket.com/auth/authorize'
            '?request_token={0}'
@@ -26,7 +26,7 @@ def generate_pocket_auth_url(request_token):
     return url
 
 
-def get_pocket_access_token(consumer_key, request_token):
+def get_access_token(consumer_key, request_token):
     """ get access token from api """
     data = {'consumer_key': consumer_key, 'code': request_token}
     headers = {'x-accept': 'application/json'}
@@ -38,7 +38,7 @@ def get_pocket_access_token(consumer_key, request_token):
         return None
 
 
-def get_pocket_items(consumer_key, access_token):
+def get_items(consumer_key, access_token):
     """ get a list pocket items from api """
     data = {
         'consumer_key': consumer_key,
@@ -53,7 +53,7 @@ def get_pocket_items(consumer_key, access_token):
         return None
 
 
-def pocket_item_to_dict(p_item):
+def item_to_dict(p_item):
     """ convert pocket item to universal dict """
     out = {
         'url': p_item.get('resolved_url') or p_item.get('given_url'),

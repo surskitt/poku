@@ -167,8 +167,11 @@ def test_dict_list_difference():
 
 
 @patch('poku.poku.parse_args')
+@patch('poku.poku.webbrowser')
+@patch('builtins.input')
 @patch('poku.pocket')
-def test_fetch_access_token_if_no_arg(mock_pocket, mock_parse_args):
+def test_fetch_access_token_if_no_arg(mock_pocket, mock_input, mock_browser,
+                                      mock_parse_args):
     """ test to make sure access token retrieval is run if not in args """
     mock_parse_args.return_value.access = None
 

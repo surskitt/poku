@@ -4,6 +4,7 @@
 
 import sys
 import configargparse
+import webbrowser
 
 import poku
 
@@ -27,7 +28,11 @@ def main():
     if not args.access:
         request_token = poku.pocket.get_request_token(consumer_key)
         auth_url = poku.pocket.generate_auth_url(request_token)
+        webbrowser.open(auth_url)
+        input('Press Enter here once auth request is approved')
         access_token = poku.pocket.get_access_token(consumer_key,
                                                     request_token)
+        print('Access token: {}'.format(access_token))
+        print('Pass as argument or add to config to avoid this step in future')
     else:
         access_token = args.access

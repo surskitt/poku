@@ -4,6 +4,8 @@
 
 import requests
 
+import poku.exceptions
+
 
 def get_request_token(consumer_key):
     """ get request token from api """
@@ -15,7 +17,7 @@ def get_request_token(consumer_key):
     if r.ok:
         return r.json()['code']
     else:
-        return None
+        raise poku.exceptions.PocketGetRequestTokenException
 
 
 def generate_auth_url(request_token):

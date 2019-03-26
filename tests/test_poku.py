@@ -48,11 +48,12 @@ def test_get_request_token(mock_get):
 
 @patch('poku.pocket.requests.post')
 def test_get_request_token_not_ok(mock_get):
-    """ Test that unsuccessful token requests return None """
+    """ Test that unsuccessful token requests return exception """
     mock_get.return_value.ok = False
 
-    token = poku.pocket.get_request_token('abc')
-    assert token is None
+    with pytest.raises(poku.exceptions.PocketGetRequestTokenException):
+        token = poku.pocket.get_request_token('abc')
+    #  assert token is None
 
 
 def test_generate_auth_url():

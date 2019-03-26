@@ -21,13 +21,8 @@ def parse_args(args):
 
 def get_pocket_request_token(consumer_key):
     """ get request token from api """
-    data = {
-        'consumer_key': consumer_key,
-        'redirect_uri': 'https://getpocket.com'
-    }
-    headers = {
-        'x-accept': 'application/json'
-    }
+    data = {'consumer_key': consumer_key, 'redirect_uri': 'getpocket.com'}
+    headers = {'x-accept': 'application/json'}
     r = requests.post('https://getpocket.com/v3/oauth/request',
                       data=data, headers=headers)
     if r.ok:
@@ -47,13 +42,8 @@ def generate_pocket_auth_url(request_token):
 
 def get_pocket_access_token(consumer_key, request_token):
     """ get access token from api """
-    data = {
-        'consumer_key': consumer_key,
-        'code': request_token
-    }
-    headers = {
-        'x-accept': 'application/json'
-    }
+    data = {'consumer_key': consumer_key, 'code': request_token}
+    headers = {'x-accept': 'application/json'}
     r = requests.post('https://getpocket.com/v3/oauth/authorize',
                       data=data, headers=headers)
     if r.ok:

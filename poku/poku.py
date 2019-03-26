@@ -16,6 +16,7 @@ def parse_args(args):
 
     return args
 
+
 def main():
     args = parse_args(sys.argv[1:])
 

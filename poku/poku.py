@@ -82,7 +82,7 @@ def pocket_item_to_dict(p_item):
     out = {
         'url': p_item.get('resolved_url') or p_item.get('given_url'),
         'title': p_item.get('resolved_title') or p_item.get('given_title'),
-        'tags': list(p_item.get('tags', {}).keys()),
+        'tags': sorted(p_item.get('tags', {}).keys()),
         'timestamp': int(p_item.get('time_updated'))
     }
 
@@ -94,7 +94,7 @@ def buku_item_to_dict(b_item):
     out = {
         'url': b_item[1],
         'title': b_item[2],
-        'tags': b_item[3].split(',')[1:-1],
+        'tags': sorted(b_item[3].split(',')[1:-1]),
         'timestamp': b_item[0]
     }
 

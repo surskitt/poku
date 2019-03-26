@@ -31,7 +31,3 @@ def main():
                                                     request_token)
     else:
         access_token = args.access
-
-
-if __name__ == '__main__':
-    main()

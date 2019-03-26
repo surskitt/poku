@@ -157,3 +157,13 @@ def test_sort_dict_items(item_list):
     sorted_list = poku.sort_dict_items(item_list)
 
     assert sorted_list == expected
+
+
+def test_dict_list_difference():
+    """ test return of items in list1 but not in list2 """
+    l1 = [{'url': 'a'}, {'url': 'b'}, {'url': 'c'}]
+    l2 = [{'url': 'b'}, {'url': 'c'}]
+    expected = [{'url': 'a'}]
+
+    filtered_list = poku.dict_list_difference(l1, l2)
+    assert filtered_list == expected

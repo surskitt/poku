@@ -106,6 +106,10 @@ def sort_dict_items(item_list):
     return sorted(item_list, key=lambda x: x['timestamp'])
 
 
+def dict_list_difference(l1, l2):
+    return [i for i in l1 if i['url'] not in [j['url'] for j in l2]]
+
+
 def main():
     args = parse_args(sys.argv[1:])
 

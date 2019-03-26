@@ -20,20 +20,20 @@ def mandatory_args():
 
 def test_parse_consumer(mandatory_args):
     """ Test that a consumer argument is handled and received """
-    args = poku.utils.parse_args(mandatory_args + ['--consumer', 'def'])
+    args = poku.poku.parse_args(mandatory_args + ['--consumer', 'def'])
     assert args.consumer == 'def'
 
 
 def test_parse_access_token(mandatory_args):
     """ Test that an access token argument is handled and received """
-    args = poku.utils.parse_args(mandatory_args + ['--access', 'ghi'])
+    args = poku.poku.parse_args(mandatory_args + ['--access', 'ghi'])
     assert args.access == 'ghi'
 
 
 def test_no_consumer():
     """ Test that missing out the consumer argument causes a system exit """
     with pytest.raises(SystemExit):
-        args = poku.utils.parse_args([])
+        args = poku.poku.parse_args([])
 
 
 @patch('poku.pocket.requests.post')

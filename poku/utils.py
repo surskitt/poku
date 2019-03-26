@@ -5,17 +5,6 @@
 import configargparse
 
 
-def parse_args(args):
-    """ parse arguments using configargparse module """
-    conf_files = ['/etc/poku/*.cfg', '~/.config/poku/*.cfg']
-    parser = configargparse.ArgParser(default_config_files=conf_files)
-    parser.add('--consumer', required=True)
-    parser.add('--access')
-    args = parser.parse_args(args)
-
-    return args
-
-
 def sort_dict_items(item_list):
     """ sort list of dict items based on update time """
     return sorted(item_list, key=lambda x: x['timestamp'])

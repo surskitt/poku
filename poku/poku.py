@@ -89,6 +89,17 @@ def pocket_item_to_dict(p_item):
     return out
 
 
+def buku_item_to_dict(b_item):
+    """ convert buku item to universal dict """
+    out = {
+        'url': b_item[1],
+        'title': b_item[2],
+        'tags': b_item[3].split(',')[1:-1],
+        'timestamp': b_item[0]
+    }
+
+    return out
+
 def sort_dict_items(item_list):
     """ sort list of dict items based on update time """
     return sorted(item_list, key=lambda x: x['timestamp'])

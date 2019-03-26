@@ -111,7 +111,7 @@ def test_get_pocket_items_not_ok(mock_get):
 
 
 def test_pocket_item_to_dict():
-    """ test converting of pocket item list to universal item list """
+    """ test converting of pocket item to universal item """
     pocket_item = {
         'resolved_url': 'test.com',
         'resolved_title': 'test page',
@@ -127,6 +127,24 @@ def test_pocket_item_to_dict():
 
     dict_item = poku.pocket_item_to_dict(pocket_item)
     assert dict_item == expected
+
+
+def test_buku_item_to_dict():
+    """ test converting of buku item to universal item """
+    buku_item = (1,
+                 'test.com',
+                 'test page',
+                 ',test,test2,')
+    expected = {
+        'url': 'test.com',
+        'title': 'test page',
+        'tags': ['test', 'test2'],
+        'timestamp': 1
+    }
+
+    dict_item = poku.buku_item_to_dict(buku_item)
+    assert dict_item == expected
+
 
 
 @pytest.mark.parametrize('item_list', [

@@ -27,8 +27,8 @@ def get_pocket_request_token(consumer_key):
     headers = {
         'x-accept': 'application/json'
     }
-    r = requests.get('https://getpocket.com/v3/oauth/request',
-                     data=data, headers=headers)
+    r = requests.post('https://getpocket.com/v3/oauth/request',
+                      data=data, headers=headers)
     if r.ok:
         return r.json()['code']
     else:
@@ -50,7 +50,7 @@ def get_pocket_access_token(consumer_key, request_token):
         'consumer_key': consumer_key,
         'code': request_token
     }
-    r = requests.get('https://getpocket.com/v3/oauth/authorize', data=data)
+    r = requests.post('https://getpocket.com/v3/oauth/authorize', data=data)
     if r.ok:
         return r.json()['access_token']
     else:
@@ -63,7 +63,7 @@ def get_pocket_items(consumer_key, access_token):
         'consumer_key': consumer_key,
         'access_token': access_token
     }
-    r = requests.get('https://getpocket.com/v3/get', data=data)
+    r = requests.post('https://getpocket.com/v3/get', data=data)
 
     if r.ok:
         return [i for i in r.json()['list'].values()]
@@ -74,3 +74,21 @@ def get_pocket_items(consumer_key, access_token):
 def sort_pocket_items(item_list):
     """ sort list of pocket items based on update time """
     return sorted(item_list, key=lambda x: x['time_updated'])
+
+
+def main():
+    args = parse_args(sys.argv[1:])
+    consumer_key = args.consumer
+    print('consumer key', consumer_key)
+    request_token = get_pocket_request_token(consumer_key)
+    print('request token', request_token)
+    auth_url = generate_pocket_auth_url(request_token)
+    print(auth_url)
+    input()
+    access_token = get_pocket_access_token(consumer_key, request_token)
+    pocket_items = get_pocket_items(consumer_key, access_token)
+    print(pocket_items[0])
+
+
+if __name__ == '__main__':
+    main()

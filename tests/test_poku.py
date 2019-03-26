@@ -36,7 +36,7 @@ def test_no_consumer():
         args = poku.parse_args([])
 
 
-@patch('poku.poku.requests.get')
+@patch('poku.poku.requests.post')
 def test_get_request_token(mock_get):
     """ Test if successful token requests return expected token """
     mock_get.return_value.ok = True
@@ -46,7 +46,7 @@ def test_get_request_token(mock_get):
     assert token == 'b'
 
 
-@patch('poku.poku.requests.get')
+@patch('poku.poku.requests.post')
 def test_get_request_token_not_ok(mock_get):
     """ Test that unsuccessful token requests return None """
     mock_get.return_value.ok = False
@@ -66,7 +66,7 @@ def test_generate_auth_url():
     assert url == expected_url
 
 
-@patch('poku.poku.requests.get')
+@patch('poku.poku.requests.post')
 def test_get_access_token(mock_get):
     """ test access token requests """
     mock_get.return_value.ok = True
@@ -76,7 +76,7 @@ def test_get_access_token(mock_get):
     assert atoken == 'a'
 
 
-@patch('poku.poku.requests.get')
+@patch('poku.poku.requests.post')
 def test_get_access_token_not_ok(mock_get):
     """ test that unsuccessful access token requests return None """
     mock_get.return_value.ok = False
@@ -85,7 +85,7 @@ def test_get_access_token_not_ok(mock_get):
     assert atoken is None
 
 
-@patch('poku.poku.requests.get')
+@patch('poku.poku.requests.post')
 def test_get_pocket_items(mock_get):
     """ test that pocket items requests returns expected list """
     mock_get.return_value.ok = True
@@ -101,7 +101,7 @@ def test_get_pocket_items(mock_get):
     assert pocket_items == expected
 
 
-@patch('poku.poku.requests.get')
+@patch('poku.poku.requests.post')
 def test_get_pocket_items_not_ok(mock_get):
     """ test that unsuccessful pocket items requests return None """
     mock_get.return_value.ok = False

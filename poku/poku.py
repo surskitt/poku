@@ -100,6 +100,7 @@ def buku_item_to_dict(b_item):
 
     return out
 
+
 def sort_dict_items(item_list):
     """ sort list of dict items based on update time """
     return sorted(item_list, key=lambda x: x['timestamp'])

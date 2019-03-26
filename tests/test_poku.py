@@ -6,9 +6,9 @@
 from unittest.mock import Mock, patch
 import pytest
 
+import configargparse
 
 from poku import poku
-import configargparse
 
 
 @pytest.fixture

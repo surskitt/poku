@@ -18,10 +18,10 @@ def parse_args(args):
     return args
 
 
-def get_pocket_response_token(consumer):
-    """ get response token from api """
+def get_pocket_request_token(consumer_key):
+    """ get request token from api """
     data = {
-        'consumer_key': consumer,
+        'consumer_key': consumer_key,
         'redirect_uri': 'https://getpocket.com'
     }
     headers = {

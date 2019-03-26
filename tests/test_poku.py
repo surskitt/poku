@@ -42,7 +42,7 @@ def test_get_request_token(mock_get):
     mock_get.return_value.ok = True
     mock_get.return_value.json = lambda: {'code': 'b'}
 
-    token = poku.get_pocket_response_token('abc')
+    token = poku.get_pocket_request_token('abc')
     assert token == 'b'
 
 
@@ -51,7 +51,7 @@ def test_get_request_token_not_ok(mock_get):
     """ Test that unsuccessful token requests return None """
     mock_get.return_value.ok = False
 
-    token = poku.get_pocket_response_token('abc')
+    token = poku.get_pocket_request_token('abc')
     assert token is None
 
 

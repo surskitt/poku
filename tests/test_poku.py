@@ -40,7 +40,7 @@ def test_no_consumer():
 def test_get_request_token(mock_get):
     """ Test if successful token requests return expected token """
     mock_get.return_value.ok = True
-    mock_get.return_value.json = lambda: {'code': 'b'}
+    mock_get.return_value.json.return_value = {'code': 'b'}
 
     token = poku.pocket.get_request_token('abc')
     assert token == 'b'
@@ -70,7 +70,7 @@ def test_generate_auth_url():
 def test_get_access_token(mock_get):
     """ test access token requests """
     mock_get.return_value.ok = True
-    mock_get.return_value.json = lambda: {'access_token': 'a'}
+    mock_get.return_value.json.return_value = {'access_token': 'a'}
 
     atoken = poku.pocket.get_access_token('ck', 'rt')
     assert atoken == 'a'
@@ -89,7 +89,7 @@ def test_get_access_token_not_ok(mock_get):
 def test_get_pocket_items(mock_get):
     """ test that pocket items requests returns expected list """
     mock_get.return_value.ok = True
-    mock_get.return_value.json = lambda: {'list': {'a': 'test1', 'b': 'test2'}}
+    mock_get.return_value.json.return_value = {'list': {'a': 'test1', 'b': 'test2'}}
     expected = ['test1', 'test2']
 
     pocket_items = sorted(poku.pocket.get_items('ck', 'at'))

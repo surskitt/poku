@@ -53,7 +53,6 @@ def test_get_request_token_not_ok(mock_get):
 
     with pytest.raises(poku.exceptions.PocketGetRequestTokenException):
         token = poku.pocket.get_request_token('abc')
-    #  assert token is None
 
 
 def test_generate_auth_url():

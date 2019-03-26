@@ -8,7 +8,7 @@ import pytest
 
 import configargparse
 
-from poku import poku
+from poku import poku, pocket
 
 
 @pytest.fixture
@@ -42,7 +42,7 @@ def test_get_request_token(mock_get):
     mock_get.return_value.ok = True
     mock_get.return_value.json = lambda: {'code': 'b'}
 
-    token = poku.get_pocket_request_token('abc')
+    token = pocket.get_pocket_request_token('abc')
     assert token == 'b'
 
 
@@ -51,7 +51,7 @@ def test_get_request_token_not_ok(mock_get):
     """ Test that unsuccessful token requests return None """
     mock_get.return_value.ok = False
 
-    token = poku.get_pocket_request_token('abc')
+    token = pocket.get_pocket_request_token('abc')
     assert token is None
 
 
@@ -62,7 +62,7 @@ def test_generate_auth_url():
                     '?request_token={0}'
                     '&redirect_uri=https://getpocket.com').format(token)
 
-    url = poku.generate_pocket_auth_url(token)
+    url = pocket.generate_pocket_auth_url(token)
     assert url == expected_url
 
 
@@ -72,7 +72,7 @@ def test_get_access_token(mock_get):
     mock_get.return_value.ok = True
     mock_get.return_value.json = lambda: {'access_token': 'a'}
 
-    atoken = poku.get_pocket_access_token('ck', 'rt')
+    atoken = pocket.get_pocket_access_token('ck', 'rt')
     assert atoken == 'a'
 
 
@@ -81,7 +81,7 @@ def test_get_access_token_not_ok(mock_get):
     """ test that unsuccessful access token requests return None """
     mock_get.return_value.ok = False
 
-    atoken = poku.get_pocket_access_token('ck', 'rt')
+    atoken = pocket.get_pocket_access_token('ck', 'rt')
     assert atoken is None
 
 
@@ -92,7 +92,7 @@ def test_get_pocket_items(mock_get):
     mock_get.return_value.json = lambda: {'list': {'a': 'test1', 'b': 'test2'}}
     expected = ['test1', 'test2']
 
-    pocket_items = sorted(poku.get_pocket_items('ck', 'at'))
+    pocket_items = sorted(pocket.get_pocket_items('ck', 'at'))
     assert pocket_items == expected
 
 
@@ -101,7 +101,7 @@ def test_get_pocket_items_not_ok(mock_get):
     """ test that unsuccessful pocket items requests return None """
     mock_get.return_value.ok = False
 
-    pocket_items = poku.get_pocket_items('ck', 'at')
+    pocket_items = pocket.get_pocket_items('ck', 'at')
     assert pocket_items is None
 
 
@@ -120,7 +120,7 @@ def test_pocket_item_to_dict():
         'timestamp': 1
     }
 
-    dict_item = poku.pocket_item_to_dict(pocket_item)
+    dict_item = pocket.pocket_item_to_dict(pocket_item)
     assert dict_item == expected
 
 

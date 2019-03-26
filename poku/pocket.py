@@ -17,7 +17,8 @@ def get_request_token(consumer_key):
     if r.ok:
         return r.json()['code']
     else:
-        raise poku.exceptions.PocketGetRequestTokenException
+        exception_msg = 'An error occured while requesting request token'
+        raise poku.exceptions.PocketGetRequestTokenException(exception_msg)
 
 
 def generate_auth_url(request_token):
@@ -39,7 +40,8 @@ def get_access_token(consumer_key, request_token):
     if r.ok:
         return r.json()['access_token']
     else:
-        raise poku.exceptions.PocketGetAccessTokenException
+        exception_msg = 'An error occured while requesting access token'
+        raise poku.exceptions.PocketGetAccessTokenException(exception_msg)
 
 
 def get_items(consumer_key, access_token):
@@ -54,7 +56,8 @@ def get_items(consumer_key, access_token):
     if r.ok:
         return [i for i in r.json()['list'].values()]
     else:
-        raise poku.exceptions.PocketGetItemsException
+        exception_msg = 'An error occured while retrieving pocket items'
+        raise poku.exceptions.PocketGetItemsException(exception_msg)
 
 
 def item_to_dict(p_item):

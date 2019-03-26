@@ -51,7 +51,9 @@ def test_get_request_token_not_ok(mock_get):
     """ Test that unsuccessful token requests return exception """
     mock_get.return_value.ok = False
 
-    with pytest.raises(poku.exceptions.PocketGetRequestTokenException):
+    exception_msg = 'An error occured while requesting request token'
+    with pytest.raises(poku.exceptions.PocketGetRequestTokenException,
+                       match=exception_msg):
         token = poku.pocket.get_request_token('abc')
 
 
@@ -81,7 +83,9 @@ def test_get_access_token_not_ok(mock_get):
     """ test that unsuccessful access token requests return None """
     mock_get.return_value.ok = False
 
-    with pytest.raises(poku.exceptions.PocketGetAccessTokenException):
+    exception_msg = 'An error occured while requesting access token'
+    with pytest.raises(poku.exceptions.PocketGetAccessTokenException,
+                       match=exception_msg):
         atoken = poku.pocket.get_access_token('ck', 'rt')
 
 
@@ -101,7 +105,9 @@ def test_get_pocket_items_not_ok(mock_get):
     """ test that unsuccessful pocket items requests return None """
     mock_get.return_value.ok = False
 
-    with pytest.raises(poku.exceptions.PocketGetItemsException):
+    exception_msg = 'An error occured while retrieving pocket items'
+    with pytest.raises(poku.exceptions.PocketGetItemsException,
+                       match=exception_msg):
         pocket_items = poku.pocket.get_items('ck', 'at')
 
 

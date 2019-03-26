@@ -81,8 +81,8 @@ def test_get_access_token_not_ok(mock_get):
     """ test that unsuccessful access token requests return None """
     mock_get.return_value.ok = False
 
-    atoken = poku.pocket.get_access_token('ck', 'rt')
-    assert atoken is None
+    with pytest.raises(poku.exceptions.PocketGetAccessTokenException):
+        atoken = poku.pocket.get_access_token('ck', 'rt')
 
 
 @patch('poku.pocket.requests.post')

@@ -39,7 +39,7 @@ def get_access_token(consumer_key, request_token):
     if r.ok:
         return r.json()['access_token']
     else:
-        return None
+        raise poku.exceptions.PocketGetAccessTokenException
 
 
 def get_items(consumer_key, access_token):

@@ -76,11 +76,6 @@ def get_pocket_items(consumer_key, access_token):
         return None
 
 
-def sort_pocket_items(item_list):
-    """ sort list of pocket items based on update time """
-    return sorted(item_list, key=lambda x: x['time_updated'])
-
-
 def pocket_item_to_dict(p_item):
     """ convert pocket item to universal dict """
     out = {
@@ -91,6 +86,11 @@ def pocket_item_to_dict(p_item):
     }
 
     return out
+
+
+def sort_dict_items(item_list):
+    """ sort list of pocket items based on update time """
+    return sorted(item_list, key=lambda x: x['timestamp'])
 
 
 def main():

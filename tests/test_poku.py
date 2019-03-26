@@ -110,18 +110,6 @@ def test_get_pocket_items_not_ok(mock_get):
     assert pocket_items is None
 
 
-@pytest.mark.parametrize('item_list', [
-    [{'time_updated': '1'}, {'time_updated': '2'}],
-    [{'time_updated': '2'}, {'time_updated': '1'}]
-])
-def test_sort_pocket_items(item_list):
-    """ test that items are being sorted correctly """
-    expected = [{'time_updated': '1'}, {'time_updated': '2'}]
-    sorted_list = poku.sort_pocket_items(item_list)
-
-    assert sorted_list == expected
-
-
 def test_pocket_item_to_dict():
     """ test converting of pocket item list to universal item list """
     pocket_item = {
@@ -139,3 +127,15 @@ def test_pocket_item_to_dict():
 
     dict_item = poku.pocket_item_to_dict(pocket_item)
     assert dict_item == expected
+
+
+@pytest.mark.parametrize('item_list', [
+    [{'timestamp': '1'}, {'timestamp': '2'}],
+    [{'timestamp': '2'}, {'timestamp': '1'}]
+])
+def test_sort_dict_items(item_list):
+    """ test that items are being sorted correctly """
+    expected = [{'timestamp': '1'}, {'timestamp': '2'}]
+    sorted_list = poku.sort_dict_items(item_list)
+
+    assert sorted_list == expected

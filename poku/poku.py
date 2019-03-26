@@ -7,6 +7,8 @@ import configargparse
 import requests
 import buku
 
+from poku import pocket
+
 
 def parse_args(args):
     """ parse arguments using configargparse module """

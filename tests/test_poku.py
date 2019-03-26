@@ -89,12 +89,7 @@ def test_get_access_token_not_ok(mock_get):
 def test_get_pocket_items(mock_get):
     """ test that pocket items requests returns expected list """
     mock_get.return_value.ok = True
-    mock_get.return_value.json = lambda: {
-        'list': {
-            'a': 'test1',
-            'b': 'test2'
-        }
-    }
+    mock_get.return_value.json = lambda: {'list': {'a': 'test1', 'b': 'test2'}}
     expected = ['test1', 'test2']
 
     pocket_items = sorted(poku.get_pocket_items('ck', 'at'))
@@ -141,7 +136,6 @@ def test_buku_item_to_dict():
 
     dict_item = poku.buku_item_to_dict(buku_item)
     assert dict_item == expected
-
 
 
 @pytest.mark.parametrize('item_list', [

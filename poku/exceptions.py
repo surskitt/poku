@@ -9,3 +9,7 @@ class PocketGetRequestTokenException(Exception):
 
 class PocketGetAccessTokenException(Exception):
     """ Raise when pocket access token request fails """
+
+
+class PocketGetItemsException(Exception):
+    """ Raise when pocket item pull fails """

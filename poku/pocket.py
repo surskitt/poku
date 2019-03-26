@@ -54,7 +54,7 @@ def get_items(consumer_key, access_token):
     if r.ok:
         return [i for i in r.json()['list'].values()]
     else:
-        return None
+        raise poku.exceptions.PocketGetItemsException
 
 
 def item_to_dict(p_item):

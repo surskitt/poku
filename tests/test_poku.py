@@ -101,8 +101,8 @@ def test_get_pocket_items_not_ok(mock_get):
     """ test that unsuccessful pocket items requests return None """
     mock_get.return_value.ok = False
 
-    pocket_items = poku.pocket.get_items('ck', 'at')
-    assert pocket_items is None
+    with pytest.raises(poku.exceptions.PocketGetItemsException):
+        pocket_items = poku.pocket.get_items('ck', 'at')
 
 
 def test_pocket_item_to_dict():

@@ -164,3 +164,28 @@ def test_dict_list_difference():
 
     filtered_list = poku.utils.dict_list_difference(l1, l2)
     assert filtered_list == expected
+
+
+@patch('poku.poku.parse_args')
+@patch('poku.pocket')
+def test_fetch_access_token_if_no_arg(mock_pocket, mock_parse_args):
+    """ test to make sure access token retrieval is run if not in args """
+    mock_parse_args.return_value.access = None
+    mock_pocket.get_request_token.return_value = None
+    mock_pocket.generate_auth_url.return_value = None
+    mock_pocket.get_access_token.return_value = None
+
+    poku.poku.main()
+
+    mock_pocket.get_access_token.assert_called_once()
+
+
+@patch('poku.poku.parse_args')
+@patch('poku.pocket.get_access_token')
+def test_skip_fetch_access_token_if_arg(mock_pocket_atoken, mock_parse_args):
+    """ test to make sure access token retrieval is skipped if arg exists """
+    mock_parse_args.return_value.access = 'token'
+
+    poku.poku.main()
+
+    mock_pocket_atoken.assert_not_called()

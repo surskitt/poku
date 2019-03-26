@@ -5,6 +5,8 @@
 import sys
 import configargparse
 
+import poku
+
 
 def parse_args(args):
     """ parse arguments using configargparse module """
@@ -19,6 +21,16 @@ def parse_args(args):
 
 def main():
     args = parse_args(sys.argv[1:])
+    consumer_key = args.consumer
+
+    # retrieve access token if not passed, otherwise use
+    if not args.access:
+        request_token = poku.pocket.get_request_token(consumer_key)
+        auth_url = poku.pocket.generate_auth_url(request_token)
+        access_token = poku.pocket.get_access_token(consumer_key,
+                                                    request_token)
+    else:
+        access_token = args.access
 
 
 if __name__ == '__main__':

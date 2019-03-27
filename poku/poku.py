@@ -41,6 +41,7 @@ def main():
 
     pocket_items = [poku.pocket.item_to_dict(i)
                     for i in poku.pocket.get_items(consumer_key, access_token)]
+    pocket_items = poku.utils.dict_list_ensure_unique(pocket_items)
     pocket_items = poku.utils.sort_dict_items(pocket_items)
 
     bukudb = buku.BukuDb()

@@ -177,6 +177,17 @@ def test_dict_list_difference():
     assert filtered_list == expected
 
 
+def test_dict_list_ensure_unique():
+    """ test ensuring list of items all have a unique url """
+    item_list = [{'url': 'a', 't': 1},
+                 {'url': 'a', 't': 2},
+                 {'url': 'b', 't': 3}]
+    expected = [{'url': 'a', 't': 2}, {'url': 'b', 't': 3}]
+
+    unique_list = poku.utils.dict_list_ensure_unique(item_list)
+    assert unique_list == expected
+
+
 @patch('poku.poku.parse_args')
 @patch('poku.poku.webbrowser')
 @patch('builtins.input')

@@ -39,15 +39,18 @@ def main():
     else:
         access_token = args.access
 
+    # retrieve pocket items, ensure unique urls and sort
     pocket_items = [poku.pocket.item_to_dict(i)
                     for i in poku.pocket.get_items(consumer_key, access_token)]
     pocket_items = poku.utils.dict_list_ensure_unique(pocket_items)
     pocket_items = poku.utils.sort_dict_items(pocket_items)
 
+    # retrieve buku items and sort
     bukudb = buku.BukuDb()
     buku_items = [poku.buku.item_to_dict(i) for i in bukudb.get_rec_all()]
     buku_items = poku.utils.sort_dict_items(buku_items)
 
+    # Add new buku items
     new_buku_items = poku.utils.dict_list_difference(pocket_items, buku_items)
     print('Adding {} new items to buku'.format(len(new_buku_items)))
     for bi in new_buku_items:

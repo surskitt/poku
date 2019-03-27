@@ -22,6 +22,9 @@ poku
 
 Symmetrical sync between pocket and buku
 
+   -c CONFIG, --config CONFIG    config file path
+   --consumer CONSUMER           pocket consumer key
+   --access ACCESS               pocket access key
 
 * Free software: GNU General Public License v3
 * Documentation: https://poku.readthedocs.io.

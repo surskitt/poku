@@ -12,9 +12,11 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
-with open(os.path.join(script_dir, 'requirements.txt')) as requirements_file:
-    requirements = requirements_file.readlines()
+requirements = [
+    'buku==4.1',
+    'requests==2.21.0',
+    'ConfigArgParse==0.14.0'
+]
 
 setup_requirements = ['pytest-runner', ]
 

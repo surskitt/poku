@@ -30,7 +30,8 @@ Symmetrical sync between pocket and buku
 Features
 --------
 
-* TODO
+* Sync pocket to buku
+* Symmetrical sync coming soon!
 
 Credits
 -------

@@ -2,6 +2,12 @@
 Usage
 =====
 
-To use poku in a project::
+   poku --consumer CONSUMER [--access ACCESS]
+   --consumer CONSUMER_TOKEN
+   --access ACCESS_TOKEN
 
-    import poku
+The app will generate an access token on first run, pass this on subsequent runs. Alternatively, enter both options into the applications config file, found at `$HOME/.config/poku.cfg`.
+
+The config file format is detailed on the `configargparse`_ docs.
+
+.. _configargparse: https://github.com/bw2/ConfigArgParse#config-file-syntax

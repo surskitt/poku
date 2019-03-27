@@ -14,8 +14,12 @@ def parse_args(args):
     """ parse arguments using configargparse module """
     conf_files = ['/etc/poku/*.cfg', '~/.config/poku/*.cfg']
     parser = configargparse.ArgParser(default_config_files=conf_files)
-    parser.add('--consumer', required=True)
-    parser.add('--access')
+    parser.add('-c', '--config', is_config_file=True,
+               help='config file path')
+    parser.add('--consumer', required=True,
+               help='pocket consumer key')
+    parser.add('--access',
+               help='pocket access key')
     args = parser.parse_args(args)
 
     return args

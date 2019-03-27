@@ -39,4 +39,17 @@ def main():
     else:
         access_token = args.access
 
+    pocket_items = [poku.pocket.item_to_dict(i)
+                    for i in poku.pocket.get_items(consumer_key, access_token)]
+    pocket_items = poku.utils.sort_dict_items(pocket_items)
 
+    bukudb = buku.BukuDb()
+    buku_items = [poku.buku.item_to_dict(i) for i in bukudb.get_rec_all()]
+    buku_items = poku.utils.sort_dict_items(buku_items)
+
+    new_buku_items = poku.utils.dict_list_difference(pocket_items, buku_items)
+    print('Adding {} new items to buku'.format(len(new_buku_items)))
+    for bi in new_buku_items:
+        bukudb.add_rec(bi['url'], title_in=bi['title'],
+                       tags_in=poku.buku.tags_to_tagstring(bi['tags']),
+                       immutable=True, delay_commit=True)

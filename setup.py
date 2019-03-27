@@ -11,7 +11,8 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [ ]
+with open('requirements.txt') as requirements_file:
+    requirements = requirements_file.readlines()
 
 setup_requirements = ['pytest-runner', ]
 
@@ -31,6 +32,9 @@ setup(
     ],
     description="Symmetrical sync between pocket and buku",
     install_requires=requirements,
+    entry_points={
+        "console_scripts": ['poku = poku.poku:main']
+    },
     license="GNU General Public License v3",
     long_description=readme + '\n\n' + history,
     include_package_data=True,

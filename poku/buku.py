@@ -13,3 +13,11 @@ def item_to_dict(b_item):
     }
 
     return out
+
+
+def tags_to_tagstring(tag_list):
+    """ convert list of tags to tagstring """
+    if tag_list == []:
+        return ','
+
+    return ',{},'.format(','.join(tag_list))

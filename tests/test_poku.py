@@ -144,6 +144,17 @@ def test_buku_item_to_dict():
     assert dict_item == expected
 
 
+@pytest.mark.parametrize('tag_list,expected', [
+    (['t1', 't2'], ',t1,t2,'),
+    (['t1'], ',t1,'),
+    ([], ',')
+])
+def test_buku_tags_to_tagstring(tag_list, expected):
+    """ test coversion of list of tags to command separated string """
+    tagstring = poku.buku.tags_to_tagstring(tag_list)
+    assert tagstring == expected
+
+
 @pytest.mark.parametrize('item_list', [
     [{'timestamp': '1'}, {'timestamp': '2'}],
     [{'timestamp': '2'}, {'timestamp': '1'}]

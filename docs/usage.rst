@@ -2,6 +2,10 @@
 Usage
 =====
 
+.. code-block:: shell
+
+   [-h] [-c CONFIG] --consumer CONSUMER [--access ACCESS]
+
    -c CONFIG, --config CONFIG    config file path
    --consumer CONSUMER           pocket consumer key
    --access ACCESS               pocket access key

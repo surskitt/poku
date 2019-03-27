@@ -2,8 +2,6 @@
 
 """ General util functions """
 
-import configargparse
-
 
 def sort_dict_items(item_list):
     """ sort list of dict items based on update time """

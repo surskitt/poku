@@ -3,10 +3,8 @@
 
 """ Tests for `poku` package. """
 
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 import pytest
-
-import configargparse
 
 import poku
 
@@ -33,7 +31,7 @@ def test_parse_access_token(mandatory_args):
 def test_no_consumer():
     """ Test that missing out the consumer argument causes a system exit """
     with pytest.raises(SystemExit):
-        args = poku.poku.parse_args([])
+        poku.poku.parse_args([])
 
 
 @patch('poku.pocket.requests.post')
@@ -54,7 +52,7 @@ def test_get_request_token_not_ok(mock_get):
     exception_msg = 'An error occured while requesting request token'
     with pytest.raises(poku.exceptions.PocketGetRequestTokenException,
                        match=exception_msg):
-        token = poku.pocket.get_request_token('abc')
+        poku.pocket.get_request_token('abc')
 
 
 def test_generate_auth_url():
@@ -86,7 +84,7 @@ def test_get_access_token_not_ok(mock_get):
     exception_msg = 'An error occured while requesting access token'
     with pytest.raises(poku.exceptions.PocketGetAccessTokenException,
                        match=exception_msg):
-        atoken = poku.pocket.get_access_token('ck', 'rt')
+        poku.pocket.get_access_token('ck', 'rt')
 
 
 @patch('poku.pocket.requests.post')
@@ -108,7 +106,7 @@ def test_get_pocket_items_not_ok(mock_get):
     exception_msg = 'An error occured while retrieving pocket items'
     with pytest.raises(poku.exceptions.PocketGetItemsException,
                        match=exception_msg):
-        pocket_items = poku.pocket.get_items('ck', 'at')
+        poku.pocket.get_items('ck', 'at')
 
 
 def test_pocket_item_to_dict():

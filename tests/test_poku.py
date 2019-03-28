@@ -3,7 +3,7 @@
 
 """ Tests for `poku` package. """
 
-from unittest.mock import patch
+from unittest.mock import patch, mock_open
 import pytest
 
 import poku
@@ -28,6 +28,7 @@ def test_parse_access_token(mandatory_args):
     assert args.access == 'ghi'
 
 
+@patch('builtins.open', mock_open(read_data=""))
 def test_no_consumer():
     """ Test that missing out the consumer argument causes a system exit """
     with pytest.raises(SystemExit):

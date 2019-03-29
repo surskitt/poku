@@ -27,8 +27,8 @@ def get_request_token(consumer_key):
 def generate_auth_url(request_token):
     """ return auth url for user to authorize application """
     url = ('https://getpocket.com/auth/authorize'
-           '?request_token={0}'
-           '&redirect_uri=https://getpocket.com').format(request_token)
+           f'?request_token={request_token}'
+           '&redirect_uri=https://getpocket.com')
 
     return url
 

@@ -3,6 +3,7 @@
 """ Main module. """
 
 import sys
+import logging
 import configargparse
 import webbrowser
 import buku
@@ -33,12 +34,12 @@ def main():
     if not args.access:
         request_token = poku.pocket.get_request_token(consumer_key)
         auth_url = poku.pocket.generate_auth_url(request_token)
-        print('Opening {} in browser'.format(auth_url))
+        print(f'Opening {auth_url} in browser')
         webbrowser.open(auth_url)
         input('Press Enter here once auth request is approved')
         access_token = poku.pocket.get_access_token(consumer_key,
                                                     request_token)
-        print('Access token: {}'.format(access_token))
+        print(f'Access token: {access_token}')
         print('Pass as argument or add to config to avoid this step in future')
     else:
         access_token = args.access
@@ -52,11 +53,12 @@ def main():
     # retrieve buku items and sort
     bukudb = buku.BukuDb()
     buku_items = [poku.buku.item_to_dict(i) for i in bukudb.get_rec_all()]
+    logging.info(f'{len(buku_items)} buku items retrieved')
     buku_items = poku.utils.sort_dict_items(buku_items)
 
     # Add new buku items
     new_buku_items = poku.utils.dict_list_difference(pocket_items, buku_items)
-    print('Adding {} new items to buku'.format(len(new_buku_items)))
+    print(f'Adding {len(new_buku_items)} new items to buku')
     for bi in new_buku_items:
         bukudb.add_rec(bi['url'], title_in=bi['title'],
                        tags_in=poku.buku.tags_to_tagstring(bi['tags']),

@@ -2,6 +2,7 @@
 
 """ Pocket specific utils """
 
+import logging
 import requests
 
 import poku.exceptions
@@ -15,7 +16,9 @@ def get_request_token(consumer_key):
                       data=data, headers=headers)
 
     if r.ok:
-        return r.json()['code']
+        request_token = r.json()['code']
+        logging.info(f'Request token retrived successfully: {request_token}')
+        return request_token
     else:
         exception_msg = 'An error occured while requesting request token'
         raise poku.exceptions.PocketGetRequestTokenException(exception_msg)
@@ -24,8 +27,8 @@ def get_request_token(consumer_key):
 def generate_auth_url(request_token):
     """ return auth url for user to authorize application """
     url = ('https://getpocket.com/auth/authorize'
-           '?request_token={0}'
-           '&redirect_uri=https://getpocket.com').format(request_token)
+           f'?request_token={request_token}'
+           '&redirect_uri=https://getpocket.com')
 
     return url
 
@@ -38,7 +41,9 @@ def get_access_token(consumer_key, request_token):
                       data=data, headers=headers)
 
     if r.ok:
-        return r.json()['access_token']
+        access_token = r.json()['access_token']
+        logging.info(f'Access token retrieved successfully: {access_token}')
+        return access_token
     else:
         exception_msg = 'An error occured while requesting access token'
         raise poku.exceptions.PocketGetAccessTokenException(exception_msg)
@@ -54,7 +59,9 @@ def get_items(consumer_key, access_token):
     r = requests.post('https://getpocket.com/v3/get', data=data)
 
     if r.ok:
-        return [i for i in r.json()['list'].values()]
+        pocket_items = [i for i in r.json()['list'].values()]
+        logging.info(f'{len(pocket_items)} pocket items retrieved')
+        return pocket_items
     else:
         exception_msg = 'An error occured while retrieving pocket items'
         raise poku.exceptions.PocketGetItemsException(exception_msg)

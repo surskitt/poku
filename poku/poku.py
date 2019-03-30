@@ -62,5 +62,5 @@ def main():
     for bi in new_buku_items:
         bukudb.add_rec(bi['url'], title_in=bi['title'],
                        tags_in=poku.buku.tags_to_tagstring(bi['tags']),
-                       immutable=True, delay_commit=True, fetch=False)
+                       delay_commit=True, fetch=False)
     bukudb.conn.commit()

@@ -34,6 +34,18 @@ Symmetrical sync between pocket and buku
 * Documentation: https://poku.readthedocs.io.
 
 
+Installation
+------------
+
+.. code-block:: shell
+
+   pip install poku
+
+**Hint:** Use pipsi_ to install in a self contained virtualenv.
+
+.. _pipsi: https://github.com/mitsuhiko/pipsi
+
+
 Features
 --------
 

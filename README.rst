@@ -6,16 +6,16 @@ poku
 .. image:: https://img.shields.io/pypi/v/poku.svg
         :target: https://pypi.python.org/pypi/poku
 
-.. image:: https://img.shields.io/travis/shanedonohoe/poku.svg
-        :target: https://travis-ci.org/shanedonohoe/poku
+.. image:: https://img.shields.io/travis/shanedabes/poku.svg
+        :target: https://travis-ci.org/shanedabes/poku
 
 .. image:: https://readthedocs.org/projects/poku/badge/?version=latest
         :target: https://poku.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 
-.. image:: https://pyup.io/repos/github/shanedonohoe/poku/shield.svg
-     :target: https://pyup.io/repos/github/shanedonohoe/poku/
+.. image:: https://pyup.io/repos/github/shanedabes/poku/shield.svg
+     :target: https://pyup.io/repos/github/shanedabes/poku/
      :alt: Updates
 
 

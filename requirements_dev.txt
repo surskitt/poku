@@ -12,5 +12,5 @@ pytest==4.5.0
 pytest-runner==4.4
 
 buku==4.2.2
-requests==2.21.0
+requests==2.22.0
 ConfigArgParse==0.14.0

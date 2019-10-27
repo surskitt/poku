@@ -9,7 +9,7 @@ Sphinx==2.1.2
 twine==1.13.0
 
 pytest==5.0.1
-pytest-runner==5.1
+pytest-runner==5.2
 
 buku==4.2.2
 requests==2.22.0

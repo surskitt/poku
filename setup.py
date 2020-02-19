@@ -14,7 +14,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'buku==4.1',
-    'requests==2.21.0',
+    'requests==2.22.0',
     'ConfigArgParse==0.14.0'
 ]
 

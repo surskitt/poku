@@ -42,7 +42,7 @@ jobs:
   release:
 
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'release'
 
     steps:
       - uses: actions/checkout@v2

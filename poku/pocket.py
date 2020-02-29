@@ -73,7 +73,7 @@ def item_to_dict(p_item):
         'url': p_item.get('resolved_url') or p_item.get('given_url'),
         'title': p_item.get('resolved_title') or p_item.get('given_title'),
         'tags': sorted(p_item.get('tags', {}).keys()),
-        'timestamp': int(p_item.get('time_updated'))
+        'timestamp': int(p_item.get('time_added'))
     }
 
     return out

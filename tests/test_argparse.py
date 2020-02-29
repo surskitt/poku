@@ -74,7 +74,7 @@ def test_pocket_item_to_dict():
         'resolved_url': 'test.com',
         'resolved_title': 'test page',
         'tags': {'test': {}, 'test2': {}},
-        'time_updated': '1'
+        'time_added': '1'
     }
     expected = {
         'url': 'test.com',

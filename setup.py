@@ -13,9 +13,9 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    'buku==4.1',
-    'requests==2.21.0',
-    'ConfigArgParse==0.14.0'
+    'buku',
+    'requests',
+    'ConfigArgParse'
 ]
 
 setup_requirements = ['pytest-runner', ]

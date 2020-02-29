@@ -41,6 +41,9 @@ Installation
 
 .. _pipsi: https://github.com/mitsuhiko/pipsi
 
+Arch linux users can install from aur_.
+
+.. _aur: https://aur.archlinux.org/packages/python-poku/
 
 Features
 --------

@@ -20,11 +20,12 @@ Symmetrical sync between pocket and buku
 
 .. code-block:: shell
 
-   [-h] [-c CONFIG] --consumer CONSUMER [--access ACCESS]
+   [-h] [-c CONFIG] --consumer CONSUMER [--access ACCESS] [--tag TAG]
 
    -c CONFIG, --config CONFIG    config file path
    --consumer CONSUMER           pocket consumer key
    --access ACCESS               pocket access key
+   --tag TAG                     add TAG to imported items
 
 * Free software: GNU General Public License v3
 * Documentation: https://poku.readthedocs.io.

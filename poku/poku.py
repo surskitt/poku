@@ -21,6 +21,8 @@ def parse_args(args):
                help='pocket consumer key')
     parser.add('--access',
                help='pocket access key')
+    parser.add('--tag',
+               help='tag to add to imported items')
     args = parser.parse_args(args)
 
     return args
@@ -60,6 +62,10 @@ def main():
     new_buku_items = poku.utils.dict_list_difference(pocket_items, buku_items)
     print(f'Adding {len(new_buku_items)} new items to buku')
     for bi in new_buku_items:
+        if args.tag:
+            # Add custom tag to imported items
+            bi['tags'] += [args.tag]
+
         bukudb.add_rec(bi['url'], title_in=bi['title'],
                        tags_in=poku.buku.tags_to_tagstring(bi['tags']),
                        delay_commit=True, fetch=False)
